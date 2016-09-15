@@ -40,9 +40,12 @@ kitchen converge
 [http://compliance.services.com](http://compliance.services.com)
 
 ### Create Automate User account
+Create organization to match name of org in cli.toml (delivery setup)
 Login to UI and create user account (save creds).
 Associate public key into user account (eg. insecure_public_key)
 Note private key location (eg. insecure_private_key)
+By default id_rsa and id_rsa.pub. Use those for ease.
+Verify permissions of keys as 0600
 
 ### Create Chef Server Admin account
 `kitchen login [CHEF SERVER KITCHEN INSTANCE NAME]`
