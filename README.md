@@ -38,3 +38,33 @@ kitchen converge
 ##### user/password: admin/password
 
 [http://compliance.services.com](http://compliance.services.com)
+
+### Create Automate User account
+Login to UI and create user account (save creds).
+Associate public key into user account (eg. insecure_public_key)
+Note private key location (eg. insecure_private_key)
+
+### Create Chef Server Admin account
+`kitchen login [CHEF SERVER KITCHEN INSTANCE NAME]`
+`sudo -i`
+`chef-server-ctl user-create admin admin user bob@mail.com 'Cod3Can!' --filename /tmp/admin.pem`
+`exit`
+`logout`
+
+Login to Chef Server UI as delivery user (above); invite admin user to the organization. Logout.
+Login to Chef Server as admin user; accept invite.
+
+### First Project
+Create local directory (eg. organization name). CD into.
+`git clone [SOME PROJECT CODE]`; CD into.
+`delivery setup --server=automate.services.com --ent=test --org=[NAME OF ORG] --user=[USER CREATED]`
+`git config --global user.name "[USER NAME]"`
+`git config --global user.email [USER EMAIL]`
+`ssh -i [PATH TO PRIVATE KEY] -l [USER@ORG] -p 8989 automate.services.com`
+Create .chef directory one level above project code
+Pull down knife.rb from Chef Server; place into .chef directory
+Place (or reset and place) user key private file into .chef directory
+`knife node list` to verify connectivity with Chef Server
+`berks install`
+`berks upload --no-ssl-verify`
+`delivery init`
