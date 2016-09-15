@@ -10,7 +10,7 @@ file "#{cache_path}/delivery.firstrun" do
   notifies :run, 'execute[delivery-ctl reconfigure]', :immediately
 end
 
-execute 'create test enterprise' do
-  command 'delivery-ctl create-enterprise test --ssh-pub-key-file=/etc/delivery/builder_key.pub > /tmp/test.creds'
-  not_if "delivery-ctl list-enterprises --ssh-pub-key-file=/etc/delivery/builder_key.pub | grep -w test"
+execute "create #{node['delivery']['enterprise_name']} enterprise" do
+  command "delivery-ctl create-enterprise #{node['delivery']['enterprise_name']} --ssh-pub-key-file=/etc/delivery/builder_key.pub > /tmp/test.creds"
+  not_if "delivery-ctl list-enterprises --ssh-pub-key-file=/etc/delivery/builder_key.pub | grep -w #{node['delivery']['enterprise_name']}"
 end
