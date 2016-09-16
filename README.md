@@ -1,4 +1,4 @@
-### chef-services
+# chef-services
 ```
 kitchen list
 kitchen converge
@@ -27,7 +27,21 @@ Get Automate credentials for admin login<br>
 user/password: admin/password (defined on first login)<br>
 [http://compliance.services.com](http://compliance.services.com)
 
-#### <u>Steps</u>
+
+#### Available Attributes
+`default['delivery']['version'] = 'latest'`<br>
+`default['delivery']['chef_server'] = 'https://chef.services.com/organizations/delivery'`<br>
+`default['delivery']['enterprise_name'] = 'Chef'`<b> ## <u>Set this to your desired enterprise name</b></u><br>
+`default['compliance']['version'] = 'latest'`<br>
+`default['compliance']['package_source'] = nil`<br>
+`default['compliance']['channel'] = :stable`<br>
+`default['compliance']['accept_license'] = false`<br>
+`default['chefdk']['bashrc'] = '/etc/bashrc'`<br>
+`default['chefdk']['version'] = '0.17.17'` <b>## <u>Use a sem-ver value, not 'latest'</b></u>
+
+# Steps
+Once kitchen converge has stood up your stack, perform the following steps to complete the configuration of your Automate enterprise and pipeline.
+
 ###### 1. Add this to your local workstation /etc/hosts
 ```
 33.33.33.10 chef.services.com
@@ -51,7 +65,6 @@ Log in to Chef server via kitchen from the chef-services repo directory and crea
 Copy contents of output file to clipboard or local workstation file as [USERNAME].pem
 Exit kitchen ssh session.<br>
 `exit`<br><br>
-Log in to
 Log in to Chef server with delivery account; select organization from Administration tab and click invite user; indicate the newly created admin user to be added and click Invite.<br>
 Log in to Chef server with admin account, accept invite.<br>
 Log in to Chef server with delivery account; select Administration tab; select Admins group from left pane and add newly created admin user to the admin group.<br>
@@ -113,3 +126,23 @@ Add the delivery-base cookbook to each environment node run-list.<br>
 
 Verify environment nodes are available to accept jobs<br>
 `knife node status`
+
+# License
+
+|                      |                                          |
+|:---------------------|:-----------------------------------------|
+| **Author:**          |
+| **Copyright:**       | Copyright 2008-2016, Chef Software, Inc.
+| **License:**         | Apache License, Version 2.0
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

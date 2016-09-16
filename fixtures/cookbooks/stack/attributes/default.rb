@@ -8,3 +8,4 @@ default['compliance']['channel'] = :stable
 default['compliance']['accept_license'] = false
 
 default['chefdk']['bashrc'] = '/etc/bashrc'
+default['chefdk']['version'] = '0.17.17'

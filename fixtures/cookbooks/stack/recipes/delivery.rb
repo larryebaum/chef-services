@@ -14,17 +14,14 @@ insights['enable'] = true
   action :install
 end
 
-ingredient_config "delivery" do
-  notifies :reconfigure, "chef_ingredient[delivery]", :immediately
+ingredient_config 'delivery' do
+  notifies :reconfigure, 'chef_ingredient[delivery]', :immediately
 end
-
-
-# build node
 
 # install chefdk
 chef_ingredient 'chefdk' do
   action :upgrade
-  version :latest
+  version node['chefdk']['version']
 end
 
 # set chefdk as default
