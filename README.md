@@ -50,12 +50,15 @@ Log in to Chef server via kitchen from the chef-services repo directory and crea
 `<br><br>
 Copy contents of output file to clipboard or local workstation file as [USERNAME].pem
 Exit kitchen ssh session.<br>
-`exit`<br>
+`exit`<br><br>
+Log in to
+Log in to Chef server with delivery account; select organization from Administration tab and click invite user; indicate the newly created admin user to be added and click Invite.<br>
+Log in to Chef server with admin account, accept invite.<br>
+Log in to Chef server with delivery account; select Administration tab; select Admins group from left pane and add newly created admin user to the admin group.<br>
 
-Log in to Chef server with admin account to verify.
 
 ###### 4. Prep local workstation for Automate Project
-Create directory matching enterprise name. Create subdirectory with organization name.<br>
+Create directory matching enterprise name. Create subdirectory with organization name. Create subdirectory cookbooks.<br>
 Within organization directory, create `.chef` directory.<br>
 Move or create private key file (from step 3 above) into .chef directory.<br>
 From Chef server UI, download knife.rb file for your Chef org and move into .chef directory.<br>
@@ -69,11 +72,11 @@ Verify connectivity to Chef server<br>
 `knife cookbook list`<br>
 
 ###### 5. Setup local Project to verify workflow
-From within organization directory, git clone some project repo, CD into directory, and push code to Chef server.<br>
+From within cookbooks directory, git clone some project repo, CD into directory, and push code to Chef server.<br>
 `berks install`<br>
 `berks upload --no-ssl-verify`<br>
 
-From within organization directory, git clone delivery-base cookbook (used for environment nodes), CD into directory, and push code to Chef server.<br>
+From within cookbooks directory, git clone delivery-base cookbook (used for environment nodes), CD into directory, and push code to Chef server.<br>
 `berks install`<br>
 `berks upload --no-ssl-verify`<br>
 
@@ -85,41 +88,3 @@ Submit either or both projects to Automate (from within project directory), prov
 
 ###### 6. Setup environment nodes/stages
 TODO: Insert steps
-
-
-
-==== OLD DELETE===
-
-Create organization to match name of org in cli.toml (delivery setup)
-Login to UI and create user account (save creds).
-Associate public key into user account (eg. insecure_public_key)
-Note private key location (eg. insecure_private_key)
-By default id_rsa and id_rsa.pub. Use those for ease.
-Verify permissions of keys as 0600
-
-#### Steps following completion of kitchen converge
-
-#### Create Chef Server Admin account
-`kitchen login [CHEF SERVER KITCHEN INSTANCE NAME]`
-`sudo -i`
-`chef-server-ctl user-create admin admin user bob@mail.com 'Cod3Can!' --filename /tmp/admin.pem`
-`exit`
-`logout`
-
-Login to Chef Server UI as delivery user (above); invite admin user to the organization. Logout.
-Login to Chef Server as admin user; accept invite.
-
-### First Project
-Create local directory (eg. organization name). CD into.
-`git clone [SOME PROJECT CODE]`; CD into.
-`delivery setup --server=automate.services.com --ent=test --org=[NAME OF ORG] --user=[USER CREATED]`
-`git config --global user.name "[USER NAME]"`
-`git config --global user.email [USER EMAIL]`
-`ssh -i [PATH TO PRIVATE KEY] -l [USER@ORG] -p 8989 automate.services.com`
-Create .chef directory one level above project code
-Pull down knife.rb from Chef Server; place into .chef directory
-Place (or reset and place) user key private file into .chef directory
-`knife node list` to verify connectivity with Chef Server
-`berks install`
-`berks upload --no-ssl-verify`
-`delivery init`

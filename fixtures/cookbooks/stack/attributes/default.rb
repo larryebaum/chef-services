@@ -1,6 +1,6 @@
 default['delivery']['version'] = 'latest'
 default['delivery']['chef_server'] = 'https://chef.services.com/organizations/delivery'
-default['delivery']['enterprise_name'] = 'test'
+default['delivery']['enterprise_name'] = 'Lilly'
 
 default['compliance']['version'] = 'latest'
 default['compliance']['package_source'] = nil
