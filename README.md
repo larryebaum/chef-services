@@ -87,4 +87,29 @@ Submit either or both projects to Automate (from within project directory), prov
 `delivery init`<br>
 
 ###### 6. Setup environment nodes/stages
-TODO: Insert steps
+Automate can use environment nodes for each of the Acceptance, Union, Rehearsal and Delivery (AURD) stages. Create nodes for each and bootstrap them to the Chef server from the organization directory of your workstation.<br>
+`knife bootstrap acceptance.services.com --ssh-user vagrant --sudo --node-name acceptance --yes`<br>
+`knife bootstrap union.services.com --ssh-user vagrant --sudo --node-name union --yes`<br>
+`knife bootstrap rehearsal.services.com --ssh-user vagrant --sudo --node-name rehearsal --yes`<br>
+`knife bootstrap delivered.services.com --ssh-user vagrant --sudo --node-name delivered --yes`<br>
+
+Create environments to be associated to each environment node. Acceptance stages typically follows the naming convention [STAGE]-[ENTERPRISE]-[ORGANIZATION]-[PROJECT]-[PIPELINE].<br>
+`knife environment create acceptance-[ORGANIZATION]-[PROJECT]-[PIPELINE] -d "The acceptance environment"`
+`knife environment create union -d "The union environment"`
+`knife environment create rehearsal -d "The rehearsal environment"`
+`knife environment create delivered -d "The delivered environment"`<br>
+
+Associate each environment to an environment node.<br>
+`knife node environment_set acceptance acceptance-[ORGANIZATION]-[PROJECT]-[PIPELINE]`
+`knife node environment_set union union`
+`knife node environment_set rehearsal rehearsal`
+`knife node environment_set delivered delivered`<br>
+
+Add the delivery-base cookbook to each environment node run-list.<br>
+`knife node run_list add acceptance 'recipe[delivery-base]'`
+`knife node run_list add union 'recipe[delivery-base]'`
+`knife node run_list add rehearsal 'recipe[delivery-base]'`
+`knife node run_list add delivered 'recipe[delivery-base]'`
+
+Verify environment nodes are available to accept jobs<br>
+`knife node status`
