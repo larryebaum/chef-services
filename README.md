@@ -40,7 +40,7 @@ user/password: admin/password (defined on first login)<br>
 `default['chefdk']['version'] = '0.17.17'` <b>## <u>Use a sem-ver value, not 'latest'</b></u>
 
 # Steps
-Once kitchen converge has stood up your stack, perform the following steps to complete the configuration of your Automate enterprise and pipeline.
+Once kitchen converge has stood up your stack, perform the following steps to complete the configuration of your Automate organization and pipeline.
 
 ###### 1. Add this to your local workstation /etc/hosts
 ```
