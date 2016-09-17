@@ -18,7 +18,7 @@ user/password: delivery/delivery<br>
 <b>Automate server</b><br>
 Get Automate credentials for admin login<br>
 `kitchen exec [AUTOMATE KITCHEN INSTANCE NAME] -c 'cat /tmp/test.creds'`<br>
-[http://automate.services.com/e/test](http://automate.services.com/e/test)
+"[http://automate.services.com](http://automate.services.com)"
 
 <b>Supermarket</b><br>
 [http://supermarket.services.com](http://supermarket.services.com)
